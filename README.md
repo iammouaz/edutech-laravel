@@ -36,7 +36,7 @@ This will build the necessary Docker containers and run the application.
 If you prefer not to use Docker, you can run the application locally. Make sure you have PHP, Composer, and MySQL (or any compatible database) installed.
 
 1. Clone the repository to your local machine.
-2. Set up the `.env` file with your database credentials. Example:
+2. Set up the `.env` file with your database credentials (You can use the same as .env.example file as defualt for docker). Example:
 
    ```
    DB_CONNECTION=mysql
@@ -106,5 +106,3 @@ The application has four main models:
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 --- 
-
-You can now modify this text or directly paste it into your README file. Let me know if you'd like any changes!
