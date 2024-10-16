@@ -79,7 +79,7 @@ This will execute the test suite defined for the application.
 You can access the API docs after running the app using the URL:
 
 ```
-php artisan test
+http://localhost:8000/docs
 ```
 
 This will execute the test suite defined for the application.
