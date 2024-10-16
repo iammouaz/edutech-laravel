@@ -11,6 +11,7 @@ use App\Http\Middleware\CheckStudentRole;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CourseCollection;
+use App\Http\Requests\JoinCourseRequest;
 
 class CourseController extends BaseController
 {
@@ -161,9 +162,11 @@ class CourseController extends BaseController
      *   "message": "Course not found"
      * }
      */
-    public function joinCourse($courseId)
+    public function joinCourse(JoinCourseRequest $request)
     {
         $user = Auth::user();
+        $courseId = $request->route('courseId');
+
         return response()->json($this->courseService->joinCourse($user->id, $courseId));
     }
 }

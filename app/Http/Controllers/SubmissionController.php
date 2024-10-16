@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Services\SubmissionService;
+use Illuminate\Routing\Controller as BaseController;
 use App\Http\Requests\StoreSubmissionRequest;
 use App\Http\Requests\UpdateSubmissionRequest;
 use App\Http\Requests\StoreMultipleSubmissionsRequest;
 use App\Http\Resources\SubmissionResource;
 use App\Http\Resources\SubmissionCollection;
+use App\Http\Middleware\CheckStudentRole;
 
-class SubmissionController extends Controller
+class SubmissionController extends BaseController
 {
     protected $submissionService;
 
     public function __construct(SubmissionService $submissionService)
     {
         $this->submissionService = $submissionService;
+        $this->middleware(CheckStudentRole::class)->only(['store', 'storeMultiple']);
+
     }
 
     /**

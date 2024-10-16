@@ -21,8 +21,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::apiResource('assignments', AssignmentController::class);
     Route::apiResource('courses', CourseController::class);
-    Route::apiResource('submissions', SubmissionController::class)->middleware(CheckStudentRole::class);
-    Route::post('submissions/multiple', [SubmissionController::class, 'storeMultiple'])->middleware(CheckStudentRole::class);
+    Route::apiResource('submissions', SubmissionController::class);
+    Route::post('submissions/multiple', [SubmissionController::class, 'storeMultiple']);
     Route::post('join-course/{courseId}', [CourseController::class, 'joinCourse']);
 
 

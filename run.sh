@@ -1,9 +1,10 @@
 #!/bin/sh
-cron
 cd /app
 composer install
 composer dump-autoload
 php artisan migrate
+php artisan key:generate
+php artisan jwt:secret
 php artisan optimize:clear
 php artisan cache:clear
 

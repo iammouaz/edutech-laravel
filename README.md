@@ -24,13 +24,22 @@ To run the application using Docker, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Ensure Docker and Docker Compose are installed on your system.
-3. Run the following command in the root directory of the project:
+
+3. Make sure to copy .env.example as .env (default env for docker) Linux Command or you can copy paste it manually: 
+
+   ```
+   cp .env.example .env
+   ```
+
+4. Run the following command in the root directory of the project:
 
    ```
    docker-compose up --build
    ```
 
 This will build the necessary Docker containers and run the application.
+
+Note: Please make sure that port 3306 isn't used by another app, Or you can change the port from the docker-compose file along with env file.
 
 ### Local Setup (Without Docker)
 If you prefer not to use Docker, you can run the application locally. Make sure you have PHP, Composer, and MySQL (or any compatible database) installed.
