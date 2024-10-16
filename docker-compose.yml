@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: edu_app
-      MYSQL_USER: root
       MYSQL_ALLOW_EMPTY_PASSWORD: "YES"
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
