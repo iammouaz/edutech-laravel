@@ -99,9 +99,6 @@ The application has four main models:
 - **Missing Migrations**: If you encounter issues related to database schema, ensure you've run `php artisan migrate`.
 - **Permission Issues**: If using Docker, ensure that your local user has the necessary permissions for file and folder access.
 
-## Contributors
-- Your Name (https://github.com/yourgithub)
-
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
