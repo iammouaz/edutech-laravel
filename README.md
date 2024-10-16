@@ -100,10 +100,10 @@ This will execute the test suite defined for the application.
 
 ## Models
 The application has four main models:
-1. **Users**: Represents both students and teachers. Users must be created with a specific role (`student` or `teacher`).
-2. **Courses**: Represents the courses that users (teachers and students) interact with.
-3. **Assignments**: Represents the tasks assigned to students by teachers within a course.
-4. **Submissions**: Represents the submissions made by students for assignments.
+1. **User**: Represents both students and teachers. Users must be created with a specific role (`student` or `teacher`).
+2. **Course**: Represents the courses that users (teachers and students) interact with.
+3. **Assignment**: Represents the tasks assigned to students by teachers within a course.
+4. **Submission**: Represents the submissions made by students for assignments.
 
 ## Dependencies
 - PHP 8.x or later
