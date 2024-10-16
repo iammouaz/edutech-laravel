@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueSubmission;
 
 class StoreSubmissionRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreSubmissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'assignment_id' => 'required|exists:assignments,id',
+            'assignment_id' => ['required', 'exists:assignments,id', new UniqueSubmission],
             'content' => 'required|string',
         ];
     }

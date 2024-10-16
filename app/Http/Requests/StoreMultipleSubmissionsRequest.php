@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueSubmission;
 
 class StoreMultipleSubmissionsRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class StoreMultipleSubmissionsRequest extends FormRequest
     {
         return [
             'submissions' => 'required|array|max:5',  // Restrict to a maximum of 5 submissions
-            'submissions.*.assignment_id' => 'required|integer|exists:assignments,id',
+            'submissions.*.assignment_id' => ['required', 'integer', 'exists:assignments,id', new UniqueSubmission],
             'submissions.*.content' => 'required|string',
         ];
     }

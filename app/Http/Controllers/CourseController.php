@@ -21,11 +21,25 @@ class CourseController extends BaseController
         $this->courseService = $courseService;
         $this->middleware(CheckTeacherRole::class)->only(['update', 'store', 'destroy']);
         $this->middleware(CheckStudentRole::class)->only('joinCourse');
-
     }
 
     /**
-     * Get all courses
+     * Get all courses.
+     *
+     * This endpoint retrieves a list of all available courses.
+     *
+     * @group Courses
+     * @response 200 {
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "title": "Introduction to Programming",
+     *       "description": "Learn the basics of programming",
+     *       "created_at": "2024-01-01T00:00:00.000000Z",
+     *       "updated_at": "2024-01-01T00:00:00.000000Z"
+     *     }
+     *   ]
+     * }
      */
     public function index()
     {
@@ -34,7 +48,22 @@ class CourseController extends BaseController
     }
 
     /**
-     * Get course by ID
+     * Get course by ID.
+     *
+     * This endpoint retrieves the details of a specific course by its ID.
+     *
+     * @group Courses
+     * @urlParam id integer required The ID of the course. Example: 1
+     * @response 200 {
+     *   "id": 1,
+     *   "title": "Introduction to Programming",
+     *   "description": "Learn the basics of programming",
+     *   "created_at": "2024-01-01T00:00:00.000000Z",
+     *   "updated_at": "2024-01-01T00:00:00.000000Z"
+     * }
+     * @response 404 {
+     *   "message": "Course not found"
+     * }
      */
     public function show($id)
     {
@@ -43,7 +72,26 @@ class CourseController extends BaseController
     }
 
     /**
-     * Create a new course - only for teachers
+     * Create a new course - only for teachers.
+     *
+     * This endpoint allows a teacher to create a new course.
+     *
+     * @group Courses
+     * @bodyParam title string required The title of the course. Example: Introduction to Programming
+     * @bodyParam description string required The description of the course. Example: Learn the basics of programming.
+     * @response 201 {
+     *   "id": 1,
+     *   "title": "Introduction to Programming",
+     *   "description": "Learn the basics of programming",
+     *   "created_at": "2024-01-01T00:00:00.000000Z",
+     *   "updated_at": "2024-01-01T00:00:00.000000Z"
+     * }
+     * @response 422 {
+     *   "message": "The given data was invalid.",
+     *   "errors": {
+     *     "title": ["The title field is required."]
+     *   }
+     * }
      */
     public function store(StoreCourseRequest $request)
     {
@@ -53,7 +101,24 @@ class CourseController extends BaseController
     }
 
     /**
-     * Update a course - only for teachers
+     * Update a course - only for teachers.
+     *
+     * This endpoint allows a teacher to update an existing course.
+     *
+     * @group Courses
+     * @urlParam id integer required The ID of the course to update. Example: 1
+     * @bodyParam title string optional The updated title of the course. Example: Advanced Programming
+     * @bodyParam description string optional The updated description of the course. Example: Learn advanced programming techniques.
+     * @response 200 {
+     *   "id": 1,
+     *   "title": "Advanced Programming",
+     *   "description": "Learn advanced programming techniques",
+     *   "created_at": "2024-01-01T00:00:00.000000Z",
+     *   "updated_at": "2024-01-02T00:00:00.000000Z"
+     * }
+     * @response 404 {
+     *   "message": "Course not found"
+     * }
      */
     public function update(UpdateCourseRequest $request, $id)
     {
@@ -63,7 +128,18 @@ class CourseController extends BaseController
     }
 
     /**
-     * Delete a course - only for teachers
+     * Delete a course - only for teachers.
+     *
+     * This endpoint allows a teacher to delete a course.
+     *
+     * @group Courses
+     * @urlParam id integer required The ID of the course to delete. Example: 1
+     * @response 200 {
+     *   "message": "Course deleted successfully"
+     * }
+     * @response 404 {
+     *   "message": "Course not found"
+     * }
      */
     public function destroy($id)
     {
@@ -72,7 +148,18 @@ class CourseController extends BaseController
     }
 
     /**
-     * Student joins a course
+     * Student joins a course.
+     *
+     * This endpoint allows a student to join a course.
+     *
+     * @group Courses
+     * @urlParam courseId integer required The ID of the course to join. Example: 1
+     * @response 200 {
+     *   "message": "Successfully joined the course"
+     * }
+     * @response 404 {
+     *   "message": "Course not found"
+     * }
      */
     public function joinCourse($courseId)
     {

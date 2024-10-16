@@ -16,14 +16,14 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('logout', [AuthController::class, 'logout']);
 
-    // Disabled Not required
+    // Disabled Not required, if I miss that it's required, Just uncomment it :)
     // Route::apiResource('users', UserController::class);
 
+    Route::apiResource('assignments', AssignmentController::class);
     Route::apiResource('courses', CourseController::class);
-    Route::apiResource('assignments', AssignmentController::class)->middleware(CheckTeacherRole::class);
     Route::apiResource('submissions', SubmissionController::class)->middleware(CheckStudentRole::class);
-    Route::post('join-course/{courseId}', [CourseController::class, 'joinCourse']);
     Route::post('submissions/multiple', [SubmissionController::class, 'storeMultiple'])->middleware(CheckStudentRole::class);
+    Route::post('join-course/{courseId}', [CourseController::class, 'joinCourse']);
 
 
 });

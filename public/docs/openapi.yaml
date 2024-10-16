@@ -1,0 +1,1334 @@
+openapi: 3.0.3
+info:
+  title: 'Edu Tech Project'
+  description: 'This is the API documentation for Edu Tech API.'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/assignments:
+    get:
+      summary: 'Display a listing of the assignments.'
+      operationId: displayAListingOfTheAssignments
+      description: 'This endpoint retrieves all assignments.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      title: 'First Assignment'
+                      description: 'Complete the following tasks...'
+                      course_id: 2
+                      due_date: '2024-10-16'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: 'First Assignment'
+                        description: 'Complete the following tasks...'
+                        course_id: 2
+                        due_date: '2024-10-16'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: 'First Assignment'
+                        description:
+                          type: string
+                          example: 'Complete the following tasks...'
+                        course_id:
+                          type: integer
+                          example: 2
+                        due_date:
+                          type: string
+                          example: '2024-10-16'
+      tags:
+        - Assignments
+      security: []
+    post:
+      summary: 'Store a newly created assignment.'
+      operationId: storeANewlyCreatedAssignment
+      description: 'This endpoint allows you to create a new assignment.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'First Assignment'
+                  description: 'Complete the following tasks...'
+                  course_id: 2
+                  due_date: '2024-10-20'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'First Assignment'
+                  description:
+                    type: string
+                    example: 'Complete the following tasks...'
+                  course_id:
+                    type: integer
+                    example: 2
+                  due_date:
+                    type: string
+                    example: '2024-10-20'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    title:
+                      - 'The title field is required.'
+                    course_id:
+                      - 'The course_id field is required.'
+                    due_date:
+                      - 'The due_date must be a date after today.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      title:
+                        type: array
+                        example:
+                          - 'The title field is required.'
+                        items:
+                          type: string
+                      course_id:
+                        type: array
+                        example:
+                          - 'The course_id field is required.'
+                        items:
+                          type: string
+                      due_date:
+                        type: array
+                        example:
+                          - 'The due_date must be a date after today.'
+                        items:
+                          type: string
+      tags:
+        - Assignments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The title of the assignment.'
+                  example: 'Homework #1'
+                description:
+                  type: string
+                  description: 'optional The description of the assignment.'
+                  example: 'Solve problems 1-10 from the textbook.'
+                course_id:
+                  type: integer
+                  description: 'The ID of the course to which this assignment belongs.'
+                  example: 2
+                due_date:
+                  type: date
+                  description: 'The due date of the assignment, which must be a date after today.'
+                  example: '2024-10-20'
+              required:
+                - title
+                - course_id
+                - due_date
+      security: []
+  '/api/assignments/{id}':
+    get:
+      summary: 'Display the specified assignment.'
+      operationId: displayTheSpecifiedAssignment
+      description: 'This endpoint retrieves a single assignment by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'First Assignment'
+                  description: 'Complete the following tasks...'
+                  course_id: 2
+                  due_date: '2024-10-16'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'First Assignment'
+                  description:
+                    type: string
+                    example: 'Complete the following tasks...'
+                  course_id:
+                    type: integer
+                    example: 2
+                  due_date:
+                    type: string
+                    example: '2024-10-16'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Assignment not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Assignment not found'
+      tags:
+        - Assignments
+      security: []
+    put:
+      summary: 'Update the specified assignment.'
+      operationId: updateTheSpecifiedAssignment
+      description: 'This endpoint allows you to update an existing assignment.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Updated Homework #1'
+                  description: 'Solve problems 1-15 from the textbook.'
+                  course_id: 2
+                  due_date: '2024-10-21'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Updated Homework #1'
+                  description:
+                    type: string
+                    example: 'Solve problems 1-15 from the textbook.'
+                  course_id:
+                    type: integer
+                    example: 2
+                  due_date:
+                    type: string
+                    example: '2024-10-21'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Assignment not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Assignment not found'
+      tags:
+        - Assignments
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'optional The updated title of the assignment.'
+                  example: 'Updated Homework #1'
+                course_id:
+                  type: integer
+                  description: 'optional The ID of the course to which this assignment belongs.'
+                  example: 2
+                description:
+                  type: string
+                  description: 'optional The updated description of the assignment.'
+                  example: 'Solve problems 1-15 from the textbook.'
+                due_date:
+                  type: date
+                  description: 'optional The updated due date of the assignment, which must be a date after today.'
+                  example: '2024-10-21'
+      security: []
+    delete:
+      summary: 'Remove the specified assignment from storage.'
+      operationId: removeTheSpecifiedAssignmentFromStorage
+      description: 'This endpoint allows you to delete an assignment.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Assignment deleted successfully'
+                properties:
+                  message:
+                    type: string
+                    example: 'Assignment deleted successfully'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Assignment not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Assignment not found'
+      tags:
+        - Assignments
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the assignment.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/register:
+    post:
+      summary: 'Register a new user.'
+      operationId: registerANewUser
+      description: 'This endpoint allows users to register for an account.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'John Doe'
+                  email: johndoe@example.com
+                  role: student
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'John Doe'
+                  email:
+                    type: string
+                    example: johndoe@example.com
+                  role:
+                    type: string
+                    example: student
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    email:
+                      - 'The email has already been taken.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  description: 'The password for the user, with a minimum length of 6 characters.'
+                  example: secret123
+                password_confirmation:
+                  type: string
+                  description: 'Must match the password.'
+                  example: secret123
+                role:
+                  type: string
+                  description: "The role of the user, either 'student' or 'teacher'."
+                  example: student
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+                - role
+      security: []
+  /api/login:
+    post:
+      summary: 'Log in a user.'
+      operationId: logInAUser
+      description: 'This endpoint authenticates a user and returns a JWT token.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Invalid credentials'
+                properties:
+                  error:
+                    type: string
+                    example: 'Invalid credentials'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email."
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  description: "The user's password."
+                  example: secret123
+              required:
+                - email
+                - password
+      security: []
+  /api/logout:
+    post:
+      summary: 'Log out the current user.'
+      operationId: logOutTheCurrentUser
+      description: 'This endpoint logs out the authenticated user and invalidates the token.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Successfully logged out'
+                properties:
+                  message:
+                    type: string
+                    example: 'Successfully logged out'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Could not log out'
+                properties:
+                  error:
+                    type: string
+                    example: 'Could not log out'
+      tags:
+        - Authentication
+      security: []
+  /api/courses:
+    get:
+      summary: 'Get all courses.'
+      operationId: getAllCourses
+      description: 'This endpoint retrieves a list of all available courses.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      title: 'Introduction to Programming'
+                      description: 'Learn the basics of programming'
+                      created_at: '2024-01-01T00:00:00.000000Z'
+                      updated_at: '2024-01-01T00:00:00.000000Z'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: 'Introduction to Programming'
+                        description: 'Learn the basics of programming'
+                        created_at: '2024-01-01T00:00:00.000000Z'
+                        updated_at: '2024-01-01T00:00:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: 'Introduction to Programming'
+                        description:
+                          type: string
+                          example: 'Learn the basics of programming'
+                        created_at:
+                          type: string
+                          example: '2024-01-01T00:00:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-01-01T00:00:00.000000Z'
+      tags:
+        - Courses
+      security: []
+    post:
+      summary: 'Create a new course - only for teachers.'
+      operationId: createANewCourseOnlyForTeachers
+      description: 'This endpoint allows a teacher to create a new course.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Introduction to Programming'
+                  description: 'Learn the basics of programming'
+                  created_at: '2024-01-01T00:00:00.000000Z'
+                  updated_at: '2024-01-01T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Introduction to Programming'
+                  description:
+                    type: string
+                    example: 'Learn the basics of programming'
+                  created_at:
+                    type: string
+                    example: '2024-01-01T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-01-01T00:00:00.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    title:
+                      - 'The title field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      title:
+                        type: array
+                        example:
+                          - 'The title field is required.'
+                        items:
+                          type: string
+      tags:
+        - Courses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The title of the course.'
+                  example: 'Introduction to Programming'
+                description:
+                  type: string
+                  description: 'The description of the course.'
+                  example: 'Learn the basics of programming.'
+              required:
+                - title
+                - description
+      security: []
+  '/api/courses/{id}':
+    get:
+      summary: 'Get course by ID.'
+      operationId: getCourseByID
+      description: 'This endpoint retrieves the details of a specific course by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Introduction to Programming'
+                  description: 'Learn the basics of programming'
+                  created_at: '2024-01-01T00:00:00.000000Z'
+                  updated_at: '2024-01-01T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Introduction to Programming'
+                  description:
+                    type: string
+                    example: 'Learn the basics of programming'
+                  created_at:
+                    type: string
+                    example: '2024-01-01T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-01-01T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Course not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Course not found'
+      tags:
+        - Courses
+      security: []
+    put:
+      summary: 'Update a course - only for teachers.'
+      operationId: updateACourseOnlyForTeachers
+      description: 'This endpoint allows a teacher to update an existing course.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Advanced Programming'
+                  description: 'Learn advanced programming techniques'
+                  created_at: '2024-01-01T00:00:00.000000Z'
+                  updated_at: '2024-01-02T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Advanced Programming'
+                  description:
+                    type: string
+                    example: 'Learn advanced programming techniques'
+                  created_at:
+                    type: string
+                    example: '2024-01-01T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-01-02T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Course not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Course not found'
+      tags:
+        - Courses
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'optional The updated title of the course.'
+                  example: 'Advanced Programming'
+                description:
+                  type: string
+                  description: 'optional The updated description of the course.'
+                  example: 'Learn advanced programming techniques.'
+      security: []
+    delete:
+      summary: 'Delete a course - only for teachers.'
+      operationId: deleteACourseOnlyForTeachers
+      description: 'This endpoint allows a teacher to delete a course.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Course deleted successfully'
+                properties:
+                  message:
+                    type: string
+                    example: 'Course deleted successfully'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Course not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Course not found'
+      tags:
+        - Courses
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the course.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/join-course/{courseId}':
+    post:
+      summary: 'Student joins a course.'
+      operationId: studentJoinsACourse
+      description: 'This endpoint allows a student to join a course.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Successfully joined the course'
+                properties:
+                  message:
+                    type: string
+                    example: 'Successfully joined the course'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Course not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Course not found'
+      tags:
+        - Courses
+      security: []
+    parameters:
+      -
+        in: path
+        name: courseId
+        description: 'The ID of the course to join.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/submissions:
+    get:
+      summary: 'Get all submissions.'
+      operationId: getAllSubmissions
+      description: 'This endpoint retrieves a list of all submissions.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      assignment_id: 2
+                      content: 'This is the content of the submission.'
+                      created_at: '2024-10-16T00:00:00.000000Z'
+                      updated_at: '2024-10-16T00:00:00.000000Z'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        assignment_id: 2
+                        content: 'This is the content of the submission.'
+                        created_at: '2024-10-16T00:00:00.000000Z'
+                        updated_at: '2024-10-16T00:00:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        assignment_id:
+                          type: integer
+                          example: 2
+                        content:
+                          type: string
+                          example: 'This is the content of the submission.'
+                        created_at:
+                          type: string
+                          example: '2024-10-16T00:00:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-10-16T00:00:00.000000Z'
+      tags:
+        - Submissions
+      security: []
+    post:
+      summary: 'Store a new submission.'
+      operationId: storeANewSubmission
+      description: 'This endpoint allows you to create a new submission.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  assignment_id: 2
+                  content: 'This is the content of the submission.'
+                  created_at: '2024-10-16T00:00:00.000000Z'
+                  updated_at: '2024-10-16T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  assignment_id:
+                    type: integer
+                    example: 2
+                  content:
+                    type: string
+                    example: 'This is the content of the submission.'
+                  created_at:
+                    type: string
+                    example: '2024-10-16T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-10-16T00:00:00.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    assignment_id:
+                      - 'The assignment_id field is required.'
+                    content:
+                      - 'The content field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      assignment_id:
+                        type: array
+                        example:
+                          - 'The assignment_id field is required.'
+                        items:
+                          type: string
+                      content:
+                        type: array
+                        example:
+                          - 'The content field is required.'
+                        items:
+                          type: string
+      tags:
+        - Submissions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignment_id:
+                  type: integer
+                  description: 'The ID of the assignment for which the submission is made.'
+                  example: 2
+                content:
+                  type: string
+                  description: 'The content of the submission.'
+                  example: 'This is my homework submission.'
+              required:
+                - assignment_id
+                - content
+      security: []
+  '/api/submissions/{id}':
+    get:
+      summary: 'Get a single submission by ID.'
+      operationId: getASingleSubmissionByID
+      description: 'This endpoint retrieves a single submission by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  assignment_id: 2
+                  content: 'This is the content of the submission.'
+                  created_at: '2024-10-16T00:00:00.000000Z'
+                  updated_at: '2024-10-16T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  assignment_id:
+                    type: integer
+                    example: 2
+                  content:
+                    type: string
+                    example: 'This is the content of the submission.'
+                  created_at:
+                    type: string
+                    example: '2024-10-16T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-10-16T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Submission not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Submission not found'
+      tags:
+        - Submissions
+      security: []
+    put:
+      summary: 'Update an existing submission.'
+      operationId: updateAnExistingSubmission
+      description: 'This endpoint allows you to update an existing submission.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  assignment_id: 2
+                  content: 'This is the updated content of the submission.'
+                  created_at: '2024-10-16T00:00:00.000000Z'
+                  updated_at: '2024-10-17T00:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  assignment_id:
+                    type: integer
+                    example: 2
+                  content:
+                    type: string
+                    example: 'This is the updated content of the submission.'
+                  created_at:
+                    type: string
+                    example: '2024-10-16T00:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-10-17T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Submission not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Submission not found'
+      tags:
+        - Submissions
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignment_id:
+                  type: integer
+                  description: 'optional The ID of the assignment for the submission.'
+                  example: 2
+                content:
+                  type: string
+                  description: 'optional The content of the submission.'
+                  example: 'This is my updated homework submission.'
+      security: []
+    delete:
+      summary: 'Delete a submission.'
+      operationId: deleteASubmission
+      description: 'This endpoint allows you to delete a submission.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Submission deleted successfully'
+                properties:
+                  message:
+                    type: string
+                    example: 'Submission deleted successfully'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Submission not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Submission not found'
+      tags:
+        - Submissions
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the submission.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/submissions/multiple:
+    post:
+      summary: 'Store multiple submissions.'
+      operationId: storeMultipleSubmissions
+      description: 'This endpoint allows you to submit multiple submissions in one request, limited to 5 at a time.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Submissions processed successfully'
+                  db_results:
+                    -
+                      id: 1
+                      assignment_id: 2
+                      content: 'Submission 1'
+                      created_at: '2024-10-16T00:00:00.000000Z'
+                      updated_at: '2024-10-16T00:00:00.000000Z'
+                    -
+                      id: 2
+                      assignment_id: 3
+                      content: 'Submission 2'
+                      created_at: '2024-10-16T00:00:00.000000Z'
+                      updated_at: '2024-10-16T00:00:00.000000Z'
+                  log_results:
+                    -
+                      status: success
+                      data:
+                        assignment_id: 1
+                        content: 'Submission 1'
+                        user_id: 7
+                        id: 101
+                    -
+                      status: success
+                      data:
+                        assignment_id: 1
+                        content: 'Submission 2'
+                        user_id: 7
+                        id: 101
+                properties:
+                  message:
+                    type: string
+                    example: 'Submissions processed successfully'
+                  db_results:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        assignment_id: 2
+                        content: 'Submission 1'
+                        created_at: '2024-10-16T00:00:00.000000Z'
+                        updated_at: '2024-10-16T00:00:00.000000Z'
+                      -
+                        id: 2
+                        assignment_id: 3
+                        content: 'Submission 2'
+                        created_at: '2024-10-16T00:00:00.000000Z'
+                        updated_at: '2024-10-16T00:00:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        assignment_id:
+                          type: integer
+                          example: 2
+                        content:
+                          type: string
+                          example: 'Submission 1'
+                        created_at:
+                          type: string
+                          example: '2024-10-16T00:00:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-10-16T00:00:00.000000Z'
+                  log_results:
+                    type: array
+                    example:
+                      -
+                        status: success
+                        data:
+                          assignment_id: 1
+                          content: 'Submission 1'
+                          user_id: 7
+                          id: 101
+                      -
+                        status: success
+                        data:
+                          assignment_id: 1
+                          content: 'Submission 2'
+                          user_id: 7
+                          id: 101
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          example: success
+                        data:
+                          type: object
+                          properties:
+                            assignment_id:
+                              type: integer
+                              example: 1
+                            content:
+                              type: string
+                              example: 'Submission 1'
+                            user_id:
+                              type: integer
+                              example: 7
+                            id:
+                              type: integer
+                              example: 101
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    submissions:
+                      - 'Submissions array is required.'
+                    submissions.max:
+                      - 'You can only submit up to 5 assignments at a time.'
+                    'submissions.*.assignment_id':
+                      - 'Assignment ID is required for each submission.'
+                    'submissions.*.content':
+                      - 'Content is required for each submission.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      submissions:
+                        type: array
+                        example:
+                          - 'Submissions array is required.'
+                        items:
+                          type: string
+                      submissions.max:
+                        type: array
+                        example:
+                          - 'You can only submit up to 5 assignments at a time.'
+                        items:
+                          type: string
+                      'submissions.*.assignment_id':
+                        type: array
+                        example:
+                          - 'Assignment ID is required for each submission.'
+                        items:
+                          type: string
+                      'submissions.*.content':
+                        type: array
+                        example:
+                          - 'Content is required for each submission.'
+                        items:
+                          type: string
+      tags:
+        - Submissions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                submissions:
+                  type: array
+                  description: 'An array of submission data.'
+                  example:
+                    -
+                      assignment_id: 2
+                      content: 'Submission 1'
+                    -
+                      assignment_id: 3
+                      content: 'Submission 2'
+                  items:
+                    type: string
+              required:
+                - submissions
+      security: []
+tags:
+  -
+    name: Assignments
+    description: ''
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Courses
+    description: ''
+  -
+    name: Submissions
+    description: ''

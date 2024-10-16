@@ -1,0 +1,370 @@
+name: Assignments
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/assignments
+    metadata:
+      groupName: Assignments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of the assignments.'
+      description: 'This endpoint retrieves all assignments.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "title": "First Assignment",
+                "description": "Complete the following tasks...",
+                "course_id": 2,
+                "due_date": "2024-10-16"
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/assignments
+    metadata:
+      groupName: Assignments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created assignment.'
+      description: 'This endpoint allows you to create a new assignment.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'The title of the assignment.'
+        required: true
+        example: 'Homework #1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      description:
+        name: description
+        description: 'optional The description of the assignment.'
+        required: false
+        example: 'Solve problems 1-10 from the textbook.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      course_id:
+        name: course_id
+        description: 'The ID of the course to which this assignment belongs.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      due_date:
+        name: due_date
+        description: 'The due date of the assignment, which must be a date after today.'
+        required: true
+        example: '2024-10-20'
+        type: date
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      title: 'Homework #1'
+      description: 'Solve problems 1-10 from the textbook.'
+      course_id: 2
+      due_date: '2024-10-20'
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "id": 1,
+            "title": "First Assignment",
+            "description": "Complete the following tasks...",
+            "course_id": 2,
+            "due_date": "2024-10-20"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "title": ["The title field is required."],
+              "course_id": ["The course_id field is required."],
+              "due_date": ["The due_date must be a date after today."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/assignments/{id}'
+    metadata:
+      groupName: Assignments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified assignment.'
+      description: 'This endpoint retrieves a single assignment by its ID.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the assignment.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "title": "First Assignment",
+            "description": "Complete the following tasks...",
+            "course_id": 2,
+            "due_date": "2024-10-16"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Assignment not found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/assignments/{id}'
+    metadata:
+      groupName: Assignments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified assignment.'
+      description: 'This endpoint allows you to update an existing assignment.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the assignment to update.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'optional The updated title of the assignment.'
+        required: false
+        example: 'Updated Homework #1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      course_id:
+        name: course_id
+        description: 'optional The ID of the course to which this assignment belongs.'
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      description:
+        name: description
+        description: 'optional The updated description of the assignment.'
+        required: false
+        example: 'Solve problems 1-15 from the textbook.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      due_date:
+        name: due_date
+        description: 'optional The updated due date of the assignment, which must be a date after today.'
+        required: false
+        example: '2024-10-21'
+        type: date
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      title: 'Updated Homework #1'
+      course_id: 2
+      description: 'Solve problems 1-15 from the textbook.'
+      due_date: '2024-10-21'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "title": "Updated Homework #1",
+            "description": "Solve problems 1-15 from the textbook.",
+            "course_id": 2,
+            "due_date": "2024-10-21"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Assignment not found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/assignments/{id}'
+    metadata:
+      groupName: Assignments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified assignment from storage.'
+      description: 'This endpoint allows you to delete an assignment.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the assignment to delete.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Assignment deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Assignment not found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

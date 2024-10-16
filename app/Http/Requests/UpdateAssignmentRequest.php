@@ -22,10 +22,10 @@ class UpdateAssignmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'course_id' => 'required|exists:courses,id',
+            'title' => 'nullable|string|max:255',
+            'course_id' => 'nullable|exists:courses,id',
             'description' => 'nullable|string',
-            'due_date' => 'required|date|after_or_equal:today',
+            'due_date' => 'nullable|date|after_or_equal:today',
         ];
 
     }

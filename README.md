@@ -75,6 +75,15 @@ php artisan test
 
 This will execute the test suite defined for the application.
 
+### API Docs
+You can access the API docs after running the app using the URL:
+
+```
+php artisan test
+```
+
+This will execute the test suite defined for the application.
+
 ## Features
 - User management with roles: `student` and `teacher`.
 - Create and manage courses, assignments, and submissions.

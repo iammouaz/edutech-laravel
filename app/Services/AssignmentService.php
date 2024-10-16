@@ -24,7 +24,6 @@ class AssignmentService
 
     public function createAssignment(array $data)
     {
-
         return $this->assignmentRepository->create($data);
     }
 
