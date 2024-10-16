@@ -67,8 +67,8 @@ class SubmissionService
             $promises[] = $this->client->postAsync('/posts', [
                 'json' => [
                     'assignment_id' => $submission['assignment_id'],
-                    'content' => $submission['content'],
-                    'user_id' => Auth::id(),
+                    'submitted_at' => now(),
+                    'student_id' => Auth::id(),
                 ]
             ]);
         }
