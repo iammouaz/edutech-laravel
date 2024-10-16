@@ -17,7 +17,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     // Disabled Not required, if I miss that it's required, Just uncomment it :)
-    // Route::apiResource('users', UserController::class);
+    Route::apiResource('users', UserController::class);
 
     Route::apiResource('assignments', AssignmentController::class);
     Route::apiResource('courses', CourseController::class);
